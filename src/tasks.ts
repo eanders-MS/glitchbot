@@ -64,8 +64,8 @@ export function glitchTask(contentUrl: string, session: builder.Session) {
         response.on('end', function () {
             try {
                 var params = session.userData.params || {
-                    seed: parseInt("" + Math.random() * 1024),
-                    amount: parseInt("" + 1 + Math.random() * 79),
+                    seed: parseInt("" + (Math.random() * 1024)),
+                    amount: parseInt("" + (1 + Math.random() * 79)),
                 };
 
                 params = utils.clampParams(params);
