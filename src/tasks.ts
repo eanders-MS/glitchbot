@@ -17,11 +17,11 @@ export function helpTask(prefix: string, session: builder.Session) {
         prefix = prefix + " ";
 
     session.send(
-        `${prefix}Upload an image for me to glitch. Once I have your image, I can:\n\n` +
+        `${prefix}Upload an image for me to glitch, or paste a URL. Once I have your image, I can:\n\n` +
         "**again** - randomize all parameters\n\n" +
-        "**seed** _number_ in 0..1024_ - change the random seed\n\n" +
+        "**seed** _number in 0..1024_ - change the random seed\n\n" +
         "**value** _number in 0..255_ - change the corruption value\n\n" +
-        "**amount** _number_ in 0..1024_ - change the amount of corruption\n\n" +
+        "**amount** _number in 0..1024_ - change the amount of corruption\n\n" +
         "I can only glitch JPG files right now. I'm still learning other file formats"
         );
 }
