@@ -1,0 +1,29 @@
+{
+  "name": "glitchbot",
+  "version": "1.0.0",
+  "description": "Photo glitching bot, build on the Microsoft Bot Framework.",
+  "main": "app.js",
+  "dependencies": {
+    "botbuilder": "^0.11.1",
+    "restify": "^4.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eanders-MS/glitchbot.git"
+  },
+  "keywords": [
+    "bot",
+    "glitch",
+    "botframework"
+  ],
+  "author": "Eric Anderson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eanders-MS/glitchbot/issues"
+  },
+  "homepage": "https://github.com/eanders-MS/glitchbot#readme"
+}
