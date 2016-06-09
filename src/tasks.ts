@@ -20,7 +20,6 @@ export function helpTask(prefix: string, session: builder.Session) {
         `${prefix}Upload an image for me to glitch, or paste a URL. Once I have your image, I can:\n\n` +
         "**again** - randomize all parameters\n\n" +
         "**seed** _number in 0..1024_ - change the random seed\n\n" +
-        "**value** _number in 0..255_ - change the corruption value\n\n" +
         "**amount** _number in 0..1024_ - change the amount of corruption\n\n" +
         "I can only glitch JPG files right now. I'm still learning other file formats"
         );
@@ -66,7 +65,6 @@ export function glitchTask(contentUrl: string, session: builder.Session) {
             try {
                 var params = session.userData.params || {
                     seed: parseInt("" + Math.random() * 1024),
-                    value: 0,
                     amount: parseInt("" + Math.random() * 80),
                 };
 
@@ -83,7 +81,6 @@ export function glitchTask(contentUrl: string, session: builder.Session) {
                 });
                 message.setText(session,
                     `**seed**: ${params.seed}\n\n` +
-                    `**value**: ${params.value}\n\n` +
                     `**amount**: ${params.amount}\n\n`);
 
                 session.userData.contentUrl = contentUrl;

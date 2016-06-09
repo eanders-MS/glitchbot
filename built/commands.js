@@ -30,9 +30,6 @@ function install(bot) {
         .matches('^seed\\s+(\\d+)', function (session, args) {
         tasks.paramTask("seed", session, args);
     })
-        .matches('^value\\s+(\\d+)', function (session, args) {
-        tasks.paramTask("value", session, args);
-    })
         .matches('^amount\\s+(\\d+)', function (session, args) {
         tasks.paramTask("amount", session, args);
     })

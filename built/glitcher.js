@@ -5,12 +5,12 @@ function glitchJpg(jpgBytes, params) {
     var jpgHeaderLength = getJpegHeaderSize(jpgBytes);
     params = utils.clampParams(params);
     for (var i = 0; i < params.amount; ++i) {
-        glitchJpgByte(jpgBytes, jpgHeaderLength, params.seed, params.value, i, params.amount);
+        glitchJpgByte(jpgBytes, jpgHeaderLength, params.seed, i, params.amount);
     }
 }
 exports.glitchJpg = glitchJpg;
 //----------------------------------------------------------------------------
-function glitchJpgByte(jpgBytes, jpgHeaderLength, seed, value, i, len) {
+function glitchJpgByte(jpgBytes, jpgHeaderLength, seed, i, len) {
     var maxIndex = jpgBytes.length - jpgHeaderLength - 4;
     var pxMin = maxIndex / len * i;
     var pxMax = maxIndex / len * (i + 1);
@@ -20,7 +20,7 @@ function glitchJpgByte(jpgBytes, jpgHeaderLength, seed, value, i, len) {
         pxIndex = maxIndex;
     }
     var index = Math.floor(jpgHeaderLength + pxIndex);
-    jpgBytes[index] = Math.floor(value);
+    jpgBytes[index] = 0;
 }
 //----------------------------------------------------------------------------
 function getJpegHeaderSize(jpgBytes) {
