@@ -60,7 +60,7 @@ function glitchTask(contentUrl, session) {
             try {
                 var params = session.userData.params || {
                     seed: parseInt("" + Math.random() * 1024),
-                    amount: parseInt("" + Math.random() * 80),
+                    amount: parseInt("" + 1 + Math.random() * 79),
                 };
                 params = utils.clampParams(params);
                 glitcher.glitchJpg(jpgBytes, params);
