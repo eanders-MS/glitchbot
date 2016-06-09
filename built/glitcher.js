@@ -1,32 +1,41 @@
 "use strict";
+var seedrandom = require('seedrandom');
 var utils = require('./utils');
 //----------------------------------------------------------------------------
-function glitchJpg(jpgBytes, params) {
-    var jpgHeaderLength = getJpegHeaderSize(jpgBytes);
-    params = utils.clampParams(params);
+function validateParams(params) {
+    return {
+        seed: params.seed || Date.now(),
+        amount: utils.clamp(Number(params.amount) || 1, 1, 1024)
+    };
+}
+exports.validateParams = validateParams;
+//----------------------------------------------------------------------------
+function glitchJpg(buffer, params) {
+    params = validateParams(params);
+    var offset = getJpegHeaderOffset(buffer);
+    var rng = seedrandom.xor4096("" + params.seed);
     for (var i = 0; i < params.amount; ++i) {
-        glitchJpgByte(jpgBytes, jpgHeaderLength, params.seed, i, params.amount);
+        glitchByte(buffer, offset, i, params.amount, rng);
     }
 }
 exports.glitchJpg = glitchJpg;
 //----------------------------------------------------------------------------
-function glitchJpgByte(jpgBytes, jpgHeaderLength, seed, i, len) {
-    var maxIndex = jpgBytes.length - jpgHeaderLength - 4;
-    var pxMin = maxIndex / len * i;
-    var pxMax = maxIndex / len * (i + 1);
+function glitchByte(buffer, offset, curr, total, rng) {
+    var maxIndex = buffer.length - offset - 4;
+    var pxMin = maxIndex / total * curr;
+    var pxMax = maxIndex / total * (curr + 1);
     var delta = pxMax - pxMin;
-    var pxIndex = pxMin + delta * (seed / 100);
-    if (pxIndex > maxIndex) {
-        pxIndex = maxIndex;
-    }
-    var index = Math.floor(jpgHeaderLength + pxIndex);
-    jpgBytes[index] = 0;
+    var pxIndex = pxMin + delta * rng();
+    pxIndex = utils.clamp(pxIndex, 0, maxIndex);
+    var index = Math.floor(offset + pxIndex);
+    buffer[index] = 0;
 }
 //----------------------------------------------------------------------------
-function getJpegHeaderSize(jpgBytes) {
+function getJpegHeaderOffset(buffer) {
+    // TODO: Use a jpg lib
     var result = 417;
-    for (var i = 0, len = jpgBytes.length; i < len; i++) {
-        if (jpgBytes[i] === 255 && jpgBytes[i + 1] === 218) {
+    for (var i = 0, len = buffer.length; i < len; i++) {
+        if (buffer[i] === 255 && buffer[i + 1] === 218) {
             result = i + 2;
             break;
         }

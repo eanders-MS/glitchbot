@@ -27,7 +27,7 @@ function install(bot) {
         .matches('^randomize', function (session, args) {
         tasks.randomizeTask(session);
     })
-        .matches('^seed\\s+(\\d+)', function (session, args) {
+        .matches('^seed\\s+(\\S+)', function (session, args) {
         tasks.paramTask("seed", session, args);
     })
         .matches('^amount\\s+(\\d+)', function (session, args) {

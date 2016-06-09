@@ -1,33 +1,42 @@
+import seedrandom = require('seedrandom');
 import utils = require('./utils');
 
 //----------------------------------------------------------------------------
-export function glitchJpg(jpgBytes, params) {
-    let jpgHeaderLength = getJpegHeaderSize(jpgBytes);
-    params = utils.clampParams(params);
+export function validateParams(params: any): any {
+    return {
+        seed: params.seed || Date.now(),
+        amount: utils.clamp(Number(params.amount) || 1, 1, 1024)
+    };
+}
+
+//----------------------------------------------------------------------------
+export function glitchJpg(buffer: Uint8Array, params: any) {
+    params = validateParams(params);
+    let offset = getJpegHeaderOffset(buffer);
+    let rng = seedrandom.xor4096("" + params.seed);
     for (let i = 0; i < params.amount; ++i) {
-        glitchJpgByte(jpgBytes, jpgHeaderLength, params.seed, i, params.amount);
+        glitchByte(buffer, offset, i, params.amount, rng);
     }
 }
 
 //----------------------------------------------------------------------------
-function glitchJpgByte(jpgBytes, jpgHeaderLength, seed, i, len) {
-    let maxIndex = jpgBytes.length - jpgHeaderLength - 4;
-    let pxMin = maxIndex / len * i;
-    let pxMax = maxIndex / len * (i + 1);
+function glitchByte(buffer: Uint8Array, offset: number, curr: number, total: number, rng: prng) {
+    let maxIndex = buffer.length - offset - 4;
+    let pxMin = maxIndex / total * curr;
+    let pxMax = maxIndex / total * (curr + 1);
     let delta = pxMax - pxMin;
-    let pxIndex = pxMin + delta * (seed / 100);
-    if (pxIndex > maxIndex) {
-        pxIndex = maxIndex;
-    }
-    var index = Math.floor(jpgHeaderLength + pxIndex);
-    jpgBytes[index] = 0;
+    let pxIndex = pxMin + delta * rng();
+    pxIndex = utils.clamp(pxIndex, 0, maxIndex);
+    let index = Math.floor(offset + pxIndex);
+    buffer[index] = 0;
 }
 
 //----------------------------------------------------------------------------
-function getJpegHeaderSize(jpgBytes): number {
+function getJpegHeaderOffset(buffer: Uint8Array): number {
+    // TODO: Use a jpg lib
     var result = 417;
-    for (let i = 0, len = jpgBytes.length; i < len; i++) {
-        if (jpgBytes[i] === 255 && jpgBytes[i + 1] === 218) {
+    for (let i = 0, len = buffer.length; i < len; i++) {
+        if (buffer[i] === 255 && buffer[i + 1] === 218) {
             result = i + 2;
             break;
         }

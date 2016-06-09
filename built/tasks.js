@@ -4,7 +4,6 @@ var http = require('http');
 var https = require('https');
 var url = require('url');
 var glitcher = require('./glitcher');
-var utils = require('./utils');
 function goodbyeTask(session) {
     session.send("See you later.");
 }
@@ -13,11 +12,11 @@ function helpTask(prefix, session) {
     prefix = prefix.trim();
     if (prefix.length)
         prefix = prefix + " ";
-    session.send((prefix + "Upload an image for me to glitch, or paste a URL. Once I have your image, I can:\n\n") +
-        "**again** - Randomize all parameters.\n\n" +
-        "**seed** _number in 0..100_ - Change the location of corruption.\n\n" +
+    session.send((prefix + "Upload an image and I will glitch it, or paste a URL. Once I have your image, I can:\n\n") +
+        "**again** - Re-glitch with new parameters.\n\n" +
+        "**seed** _anything_ - Seed the random number generator.\n\n" +
         "**amount** _number in 0..1024_ - Change the amount of corruption.\n\n" +
-        "\n\nI can only glitch JPG files right now. I'm still learning other file formats.");
+        "\n\nI can only glitch JPG images right now. I'm still learning other image formats!");
 }
 exports.helpTask = helpTask;
 function randomizeTask(session) {
@@ -35,7 +34,7 @@ function paramTask(name, session, args) {
     var contentUrl = session.userData.contentUrl;
     var params = session.userData.params;
     if (contentUrl && params) {
-        var value = parseInt(args.matches[1], 10);
+        var value = args.matches[1];
         session.userData.params[name] = value;
         glitchTask(contentUrl, session);
     }
@@ -59,10 +58,10 @@ function glitchTask(contentUrl, session) {
         response.on('end', function () {
             try {
                 var params = session.userData.params || {
-                    seed: parseInt("" + (Math.random() * 100)),
+                    seed: Date.now(),
                     amount: parseInt("" + (1 + Math.random() * 79)),
                 };
-                params = utils.clampParams(params);
+                params = glitcher.validateParams(params);
                 glitcher.glitchJpg(jpgBytes, params);
                 var encoder = new Buffer(jpgBytes);
                 var encoded = encoder.toString('base64');
