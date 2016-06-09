@@ -15,7 +15,7 @@ function glitchJpgByte(jpgBytes, jpgHeaderLength, seed, i, len) {
     let pxMin = maxIndex / len * i;
     let pxMax = maxIndex / len * (i + 1);
     let delta = pxMax - pxMin;
-    let pxIndex = pxMin + delta * (seed / 1024);
+    let pxIndex = pxMin + delta * (seed / 100);
     if (pxIndex > maxIndex) {
         pxIndex = maxIndex;
     }

@@ -5,7 +5,7 @@ export function clamp(v: number, a: number, b: number): number {
 
 export function clampParams(params: any): any {
     return {
-        seed: clamp((params.seed || 0), 0, 1024),
+        seed: clamp((params.seed || 0), 0, 100),
         amount: clamp(params.amount || 0, 0, 1024)
     };
 }

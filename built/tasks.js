@@ -15,7 +15,7 @@ function helpTask(prefix, session) {
         prefix = prefix + " ";
     session.send((prefix + "Upload an image for me to glitch, or paste a URL. Once I have your image, I can:\n\n") +
         "**again** - Randomize all parameters.\n\n" +
-        "**seed** _number in 0..1024_ - Change the random seed.\n\n" +
+        "**seed** _number in 0..100_ - Change the location of corruption.\n\n" +
         "**amount** _number in 0..1024_ - Change the amount of corruption.\n\n" +
         "\n\nI can only glitch JPG files right now. I'm still learning other file formats.");
 }
@@ -59,7 +59,7 @@ function glitchTask(contentUrl, session) {
         response.on('end', function () {
             try {
                 var params = session.userData.params || {
-                    seed: parseInt("" + (Math.random() * 1024)),
+                    seed: parseInt("" + (Math.random() * 100)),
                     amount: parseInt("" + (1 + Math.random() * 79)),
                 };
                 params = utils.clampParams(params);
