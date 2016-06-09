@@ -22,10 +22,10 @@ function install(bot) {
         tasks.goodbyeTask(session);
     })
         .matches('^again', function (session, args) {
-        tasks.randomizeTask(session);
+        tasks.againTask(session);
     })
-        .matches('^randomize', function (session, args) {
-        tasks.randomizeTask(session);
+        .matches('^showme', function (session, args) {
+        tasks.showMeTask(session);
     })
         .matches('^seed\\s+(\\S+)', function (session, args) {
         tasks.paramTask("seed", session, args);
