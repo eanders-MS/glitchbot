@@ -18,10 +18,10 @@ export function helpTask(prefix: string, session: builder.Session) {
 
     session.send(
         `${prefix}Upload an image for me to glitch, or paste a URL. Once I have your image, I can:\n\n` +
-        "**again** - randomize all parameters\n\n" +
-        "**seed** _number in 0..1024_ - change the random seed\n\n" +
-        "**amount** _number in 0..1024_ - change the amount of corruption\n\n" +
-        "I can only glitch JPG files right now. I'm still learning other file formats"
+        "**again** - Randomize all parameters.\n\n" +
+        "**seed** _number in 0..1024_ - Change the random seed.\n\n" +
+        "**amount** _number in 0..1024_ - Change the amount of corruption.\n\n" +
+        "\n\nI can only glitch JPG files right now. I'm still learning other file formats."
         );
 }
 
