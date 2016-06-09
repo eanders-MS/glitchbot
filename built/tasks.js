@@ -4,6 +4,7 @@ var http = require('http');
 var https = require('https');
 var url = require('url');
 var glitcher = require('./glitcher');
+var utils = require('./utils');
 function goodbyeTask(session) {
     session.send("See you later.");
 }
@@ -73,7 +74,7 @@ function glitchTask(contentUrl, session) {
         response.on('end', function () {
             try {
                 var params = session.userData.params || {
-                    seed: Date.now(),
+                    seed: utils.makeSeed(8),
                     amount: parseInt("" + (1 + Math.random() * 79)),
                 };
                 params = glitcher.validateParams(params);

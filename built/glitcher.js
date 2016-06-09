@@ -4,7 +4,7 @@ var utils = require('./utils');
 //----------------------------------------------------------------------------
 function validateParams(params) {
     return {
-        seed: params.seed || Date.now(),
+        seed: params.seed || utils.makeSeed(8),
         amount: utils.clamp(Number(params.amount) || 1, 1, 1024)
     };
 }

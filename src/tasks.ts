@@ -52,7 +52,7 @@ export function paramTask(name: string, session: builder.Session, args: any) {
 }
 
 export function showMeTask(session: builder.Session) {
-    var images = [
+    const images = [
         'http://johnmcdonald.net.au/wp-content/uploads/2014/11/22544_CLOSE.jpg',
         'http://portra.wpshower.com/wp-content/uploads/2014/03/martin-schoeller-clint-eastwood-portrait-up-close-and-personal.jpg',
         'http://static1.squarespace.com/static/54ad3f73e4b0114202826a72/54bd4aa8e4b013117e10708f/54bd4ad0e4b07b4a7d21ae84/1436142186094/PariDukovicPortraits_01.jpg',
@@ -81,7 +81,7 @@ export function glitchTask(contentUrl: string, session: builder.Session) {
         response.on('end', function () {
             try {
                 var params = session.userData.params || {
-                    seed: Date.now(),
+                    seed: utils.makeSeed(8),
                     amount: parseInt("" + (1 + Math.random() * 79)),
                 };
 
