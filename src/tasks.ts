@@ -18,8 +18,8 @@ export function helpTask(prefix: string, session: builder.Session) {
 
     session.send(
         `${prefix}Upload an image and I will glitch it, or paste a URL. Once I have your image, I can:\n\n` +
-        "**again** - Re-glitch with new parameters.\n\n" +
-        "**seed** _anything_ - Seed the random number generator.\n\n" +
+        "**again** - Re-glitch same image.\n\n" +
+        "**seed** _anything_ - Random number seed.\n\n" +
         "**amount** _number in 1..1024_ - How much glitch.\n\n" +
         "**showme** - Just glitch me a picture!" +
         "\n\nI only work on JPG images right now. I'm still learning the other formats!"
