@@ -8,7 +8,7 @@ function makeSeed(length) {
     var consonants = ['b', 'd', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w'];
     var vowels = ['a', 'e', 'i', 'o', 'u'];
     // make sure it's an even number
-    length += length + length % 2;
+    length = length + (length % 2);
     var seed = "";
     for (var i = 0; i < length / 2; ++i) {
         seed += consonants[Math.floor(Math.random() * consonants.length)];

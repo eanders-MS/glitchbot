@@ -19,14 +19,14 @@ function helpTask(prefix, session) {
         "**amount** _number in 0..1024_ - Change the amount of corruption.\n\n" +
         "**showme** - Just show me a picture!" +
         "\n\nI can only glitch JPG images right now. I'm still learning other image formats!");
-    showMeTask(session);
+    showMeTask('Sample of the goods:', session);
 }
 exports.helpTask = helpTask;
 function againTask(session) {
     var contentUrl = session.userData.contentUrl;
     if (contentUrl) {
         session.userData.params = undefined;
-        glitchTask(contentUrl, session);
+        glitchTask('Re-glitched...', contentUrl, session);
     }
     else {
         session.send("Upload an image first.");
@@ -39,28 +39,33 @@ function paramTask(name, session, args) {
     if (contentUrl && params) {
         var value = args.matches[1];
         session.userData.params[name] = value;
-        glitchTask(contentUrl, session);
+        glitchTask('Re-glitched...', contentUrl, session);
     }
     else {
         session.send("Upload an image first.");
     }
 }
 exports.paramTask = paramTask;
-function showMeTask(session) {
+function showMeTask(prompt, session) {
     var images = [
         'http://johnmcdonald.net.au/wp-content/uploads/2014/11/22544_CLOSE.jpg',
         'http://portra.wpshower.com/wp-content/uploads/2014/03/martin-schoeller-clint-eastwood-portrait-up-close-and-personal.jpg',
-        'http://static1.squarespace.com/static/54ad3f73e4b0114202826a72/54bd4aa8e4b013117e10708f/54bd4ad0e4b07b4a7d21ae84/1436142186094/PariDukovicPortraits_01.jpg',
         'http://a4.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTIwNjA4NjMzODg2NTc0MDky.jpg',
         'http://a4.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTE1ODA0OTcxMjc3MzIxNzQx.jpg',
         'https://s-media-cache-ak0.pinimg.com/736x/31/16/93/311693428ecf431808a55e483a293d79.jpg'
     ];
-    var index = Math.floor(Math.random() * images.length);
+    var prompts = [
+        'Check it out:',
+        'here\'s one:',
+        'One of my personal favorites:',
+        'Here\'s what I do:',
+    ];
+    prompt = prompt || prompts[Math.floor(Math.random() * prompts.length)];
     session.userData.params = undefined;
-    glitchTask(images[index], session);
+    glitchTask(prompt, images[Math.floor(Math.random() * images.length)], session);
 }
 exports.showMeTask = showMeTask;
-function glitchTask(contentUrl, session) {
+function glitchTask(prompt, contentUrl, session) {
     console.log("glitching " + contentUrl);
     var parsedUrl = url.parse(contentUrl);
     var protocol = (parsedUrl.protocol == 'https:' ? https : http);
@@ -87,7 +92,11 @@ function glitchTask(contentUrl, session) {
                     contentType: "image/jpeg",
                     content: encoded
                 });
-                message.setText(session, ("**seed**: " + params.seed + "\n\n") +
+                prompt = prompt || "";
+                if (prompt.length > 0)
+                    prompt = prompt + "\n\n";
+                message.setText(session, ("" + prompt) +
+                    ("**seed**: " + params.seed + "\n\n") +
                     ("**amount**: " + params.amount + "\n\n"));
                 session.userData.contentUrl = contentUrl;
                 session.userData.params = params;

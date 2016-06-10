@@ -25,7 +25,7 @@ function install(bot) {
         tasks.againTask(session);
     })
         .matches('^showme', function (session, args) {
-        tasks.showMeTask(session);
+        tasks.showMeTask(null, session);
     })
         .matches('^seed\\s+(\\S+)', function (session, args) {
         tasks.paramTask("seed", session, args);
@@ -35,17 +35,17 @@ function install(bot) {
     })
         .matches('^http:', function (session, args) {
         session.userData = {};
-        tasks.glitchTask(session.message.text, session);
+        tasks.glitchTask('Here ya go!', session.message.text, session);
     })
         .matches('^https:', function (session, args) {
         session.userData = {};
-        tasks.glitchTask(session.message.text, session);
+        tasks.glitchTask('Here ya go!', session.message.text, session);
     })
         .onDefault(function (session) {
         if (session.message.attachments && session.message.attachments.length) {
             session.userData = {};
             var attachment = session.message.attachments[0];
-            tasks.glitchTask(attachment.contentUrl, session);
+            tasks.glitchTask('Glitched it for ya!', attachment.contentUrl, session);
         }
         else {
             tasks.helpTask("I didn't understand that.", session);

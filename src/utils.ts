@@ -8,7 +8,7 @@ export function makeSeed(length: number = 6): string {
     const vowels: string[] = ['a', 'e', 'i', 'o', 'u'];
 
     // make sure it's an even number
-    length += length + length % 2;
+    length = length + (length % 2);
 
     var seed = "";
 
