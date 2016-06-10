@@ -4,10 +4,9 @@ function clamp(v, min, max) {
 }
 exports.clamp = clamp;
 function makeSeed(length) {
-    if (length === void 0) { length = 6; }
+    if (length === void 0) { length = 8; }
     var consonants = ['b', 'd', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w'];
     var vowels = ['a', 'e', 'i', 'o', 'u'];
-    // make sure it's an even number
     length = length + (length % 2);
     var seed = "";
     for (var i = 0; i < length / 2; ++i) {

@@ -80,8 +80,8 @@ function glitchTask(prompt, contentUrl, session) {
         response.on('end', function () {
             try {
                 var params = session.userData.params || {
-                    seed: utils.makeSeed(8),
-                    amount: parseInt("" + (1 + Math.random() * 79)),
+                    seed: utils.makeSeed(),
+                    amount: parseInt("" + (3 + Math.random() * 76)),
                 };
                 params = glitcher.validateParams(params);
                 glitcher.glitchJpg(jpgBytes, params);
