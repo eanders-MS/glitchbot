@@ -9,6 +9,9 @@ function install(bot) {
         .matches('^hi', function (session, args) {
         tasks.helpTask("Hi!", session);
     })
+        .matches('^/start', function (session, args) {
+        tasks.helpTask("Hi!", session);
+    })
         .matches('^hello', function (session, args) {
         tasks.helpTask("Hi!", session);
     })
