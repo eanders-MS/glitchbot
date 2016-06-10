@@ -90,7 +90,7 @@ function glitchTask(prompt, contentUrl, session) {
                 var message = new builder.Message();
                 message.addAttachment({
                     contentType: "image/jpeg",
-                    content: encoded
+                    contentUrl: "data:image/jpeg;base64," + encoded
                 });
                 prompt = prompt || "";
                 if (prompt.length > 0)
