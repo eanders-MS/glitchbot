@@ -20,9 +20,9 @@ export function helpTask(prefix: string, session: builder.Session) {
         `${prefix}Upload an image and I will glitch it, or paste a URL. Once I have your image, I can:\n\n` +
         "**again** - Re-glitch with new parameters.\n\n" +
         "**seed** _anything_ - Seed the random number generator.\n\n" +
-        "**amount** _number in 0..1024_ - Change the amount of corruption.\n\n" +
-        "**showme** - Just show me a picture!" +
-        "\n\nI can only glitch JPG images right now. I'm still learning other image formats!"
+        "**amount** _number in 1..1024_ - How much glitch.\n\n" +
+        "**showme** - Just glitch me a picture!" +
+        "\n\nI only work on JPG images right now. I'm still learning the other formats!"
         );
     showMeTask('Sample of the goods:', session);
 }
@@ -57,7 +57,11 @@ export function showMeTask(prompt: string, session: builder.Session) {
         'http://portra.wpshower.com/wp-content/uploads/2014/03/martin-schoeller-clint-eastwood-portrait-up-close-and-personal.jpg',
         'http://a4.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTIwNjA4NjMzODg2NTc0MDky.jpg',
         'http://a4.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTE1ODA0OTcxMjc3MzIxNzQx.jpg',
-        'https://s-media-cache-ak0.pinimg.com/736x/31/16/93/311693428ecf431808a55e483a293d79.jpg'
+        'https://s-media-cache-ak0.pinimg.com/736x/31/16/93/311693428ecf431808a55e483a293d79.jpg',
+        'http://ngm.nationalgeographic.com/2011/08/robots/img/08-child-robot-face-714.jpg',
+        'https://i.ytimg.com/vi/0oBx7Jg4m-o/maxresdefault.jpg',
+        'http://cbsnews2.cbsistatic.com/hub/i/r/2005/07/01/b82b0d01-a644-11e2-a3f0-029118418759/thumbnail/620x350/06670add9acfee22becb652c62fc64c4/image705913x.jpg',
+        'http://cdn.history.com/sites/2/2014/02/jqadams_portrait-P.jpeg'
     ];
 
     const prompts = [
