@@ -100,9 +100,9 @@ export function glitchTask(prompt:string, contentUrl: string, session: builder.S
                 var encoder = new Buffer(jpgBytes);
                 var encoded = encoder.toString('base64');
                 var message = new builder.Message();
-                message.addAttachment(<any>{
+                message.addAttachment({
                     contentType: "image/jpeg",
-                    content: encoded
+                    contentUrl: "data:image/jpeg;base64," + encoded
                 });
                 prompt = prompt || "";
                 if (prompt.length > 0)
