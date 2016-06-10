@@ -21,7 +21,7 @@ export function helpTask(prefix: string, session: builder.Session) {
         "**again** - Re-glitch same image.\n\n" +
         "**seed** _anything_ - Random number seed.\n\n" +
         "**amount** _number in 1..1024_ - How much glitch.\n\n" +
-        "**showme** - Just glitch me a picture!" +
+        "**showme** - Just glitch me a picture!\n\n" +
         "\n\nI only work on JPG images right now. I'm still learning the other formats!"
         );
     showMeTask('Sample of the goods:', session);
