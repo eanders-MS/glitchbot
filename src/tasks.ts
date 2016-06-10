@@ -63,6 +63,8 @@ export function showMeTask(session: builder.Session) {
 
     let index = Math.floor(Math.random() * images.length);
 
+    session.userData.params = undefined;
+
     glitchTask(images[index], session);
 }
 

@@ -56,6 +56,7 @@ function showMeTask(session) {
         'https://s-media-cache-ak0.pinimg.com/736x/31/16/93/311693428ecf431808a55e483a293d79.jpg'
     ];
     var index = Math.floor(Math.random() * images.length);
+    session.userData.params = undefined;
     glitchTask(images[index], session);
 }
 exports.showMeTask = showMeTask;
