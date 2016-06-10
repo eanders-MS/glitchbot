@@ -1,0 +1,24 @@
+{
+  "name": "glitchbot",
+  "version": "1.0.0",
+  "description": "gh-pages",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eanders-MS/glitchbot.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eanders-MS/glitchbot/issues"
+  },
+  "homepage": "https://github.com/eanders-MS/glitchbot#readme",
+  "dependencies": {
+    "connect": "^3.4.1",
+    "serve-static": "^1.11.0"
+  }
+}
