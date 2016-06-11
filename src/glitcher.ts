@@ -23,7 +23,7 @@ export function glitchJpg(buffer: Uint8Array, params: any) {
 function glitchByte(buffer: Uint8Array, offset: number, curr: number, total: number, rng: prng) {
     let maxIndex = buffer.length - offset - 4;
     let index = Math.floor(Math.random() * maxIndex);
-    buffer[index] = 0;
+    buffer[index] = Math.floor(Math.random() * 255);
 }
 
 //----------------------------------------------------------------------------
