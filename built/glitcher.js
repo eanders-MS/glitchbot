@@ -22,13 +22,6 @@ exports.glitchJpg = glitchJpg;
 //----------------------------------------------------------------------------
 function glitchByte(buffer, offset, curr, total, rng) {
     var maxIndex = buffer.length - offset - 4;
-    //let pxMin = maxIndex / total * curr;
-    //let pxMax = maxIndex / total * (curr + 1);
-    //let delta = pxMax - pxMin;
-    //let pxIndex = pxMin + delta * rng();
-    //pxIndex = utils.clamp(pxIndex, 0, maxIndex);
-    //let index = Math.floor(offset + pxIndex);
-    //buffer[index] = 0;
     var index = Math.floor(Math.random() * maxIndex);
     buffer[index] = 0;
 }
