@@ -23,7 +23,7 @@ exports.glitchJpg = glitchJpg;
 function glitchByte(buffer, offset, curr, total, rng) {
     var maxIndex = buffer.length - offset - 4;
     var index = Math.floor(Math.random() * maxIndex);
-    buffer[index] = Math.floor(Math.random() * 255);
+    buffer[index] = Math.floor(Math.random() * 20);
 }
 //----------------------------------------------------------------------------
 function getJpegHeaderOffset(buffer) {
